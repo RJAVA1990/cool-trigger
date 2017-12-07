@@ -1,27 +1,18 @@
 {
-  "name": "rc-trigger",
-  "version": "2.3.3",
-  "description": "base abstract trigger component for react",
-  "keywords": [
-    "react",
-    "react-component",
-    "react-trigger",
-    "trigger"
-  ],
-  "homepage": "https://github.com/react-component/trigger",
+  "name": "cool-trigger",
+  "version": "0.0.5",
+  "description": "Modified rc-trigger to fulfill my own usage",
+  "keywords": ["react", "react-component", "react-trigger", "trigger", "cool"],
+  "homepage": "https://github.com/RJAVA1990/cool-trigger",
   "author": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/react-component/trigger.git"
+    "url": "https://github.com/RJAVA1990/cool-trigger.git"
   },
   "bugs": {
-    "url": "https://github.com/react-component/trigger/issues"
+    "url": "https://github.com/RJAVA1990/cool-trigger/issues"
   },
-  "files": [
-    "es",
-    "lib",
-    "assets/*.css"
-  ],
+  "files": ["es", "lib", "assets/*.css"],
   "licenses": "MIT",
   "main": "./lib/index",
   "module": "./es/index",
@@ -46,15 +37,12 @@
     "core-js": "^2.5.1",
     "expect.js": "0.3.x",
     "jquery": "~1.11.3",
-    "pre-commit": "1.x",
     "rc-test": "6.x",
     "rc-tools": "7.x",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },
-  "pre-commit": [
-    "lint"
-  ],
+  "pre-commit": ["lint"],
   "dependencies": {
     "babel-runtime": "6.x",
     "create-react-class": "15.x",

@@ -43,7 +43,7 @@ class Popup extends Component {
       popupDomNode.className = this.getClassName(currentAlignClassName);
     }
     props.onAlign(popupDomNode, align);
-  }
+  };
 
   getPopupDomNode() {
     return ReactDOM.findDOMNode(this.popupInstance);
@@ -51,7 +51,7 @@ class Popup extends Component {
 
   getTarget = () => {
     return this.props.getRootDomNode();
-  }
+  };
 
   getMaskTransitionName() {
     const props = this.props;
@@ -73,14 +73,17 @@ class Popup extends Component {
   }
 
   getClassName(currentAlignClassName) {
-    return `${this.props.prefixCls} ${this.props.className} ${currentAlignClassName}`;
+    return `${this.props.prefixCls} ${this.props.className} ${
+      currentAlignClassName
+    }`;
   }
 
   getPopupElement() {
     const { savePopupRef, props } = this;
     const { align, style, visible, prefixCls, destroyPopupOnHide } = props;
-    const className = this.getClassName(this.currentAlignClassName ||
-      props.getClassNameFromAlign(align));
+    const className = this.getClassName(
+      this.currentAlignClassName || props.getClassNameFromAlign(align)
+    );
     const hiddenClassName = `${prefixCls}-hidden`;
     if (!visible) {
       this.currentAlignClassName = null;
@@ -97,56 +100,70 @@ class Popup extends Component {
       onMouseLeave: props.onMouseLeave,
       style: newStyle,
     };
+    const popupInnerDestroy = (
+      <PopupInner visible {...popupInnerProps}>
+        {props.children}
+      </PopupInner>
+    );
     if (destroyPopupOnHide) {
-      return (<Animate
+      return (
+        <Animate
+          component=""
+          exclusive
+          transitionAppear
+          transitionName={this.getTransitionName()}
+        >
+          {visible ? (
+            align ? (
+              <Align
+                target={this.getTarget}
+                key="popup"
+                ref={this.saveAlignRef}
+                monitorWindowResize
+                align={align}
+                onAlign={this.onAlign}
+              >
+                {popupInnerDestroy}
+              </Align>
+            ) : (
+              popupInnerDestroy
+            )
+          ) : null}
+        </Animate>
+      );
+    }
+    const popupInner = (
+      <PopupInner hiddenClassName={hiddenClassName} {...popupInnerProps}>
+        {props.children}
+      </PopupInner>
+    );
+    return (
+      <Animate
         component=""
         exclusive
         transitionAppear
         transitionName={this.getTransitionName()}
+        showProp="xVisible"
       >
-        {visible ? (<Align
-          target={this.getTarget}
-          key="popup"
-          ref={this.saveAlignRef}
-          monitorWindowResize
-          align={align}
-          onAlign={this.onAlign}
-        >
-          <PopupInner
-            visible
-            {...popupInnerProps}
+        {align ? (
+          <Align
+            target={this.getTarget}
+            key="popup"
+            ref={this.saveAlignRef}
+            monitorWindowResize
+            xVisible={visible}
+            childrenProps={{ visible: 'xVisible' }}
+            disabled={!visible}
+            align={align}
+            onAlign={this.onAlign}
           >
-            {props.children}
-          </PopupInner>
-        </Align>) : null}
-      </Animate>);
-    }
-    return (<Animate
-      component=""
-      exclusive
-      transitionAppear
-      transitionName={this.getTransitionName()}
-      showProp="xVisible"
-    >
-      <Align
-        target={this.getTarget}
-        key="popup"
-        ref={this.saveAlignRef}
-        monitorWindowResize
-        xVisible={visible}
-        childrenProps={{ visible: 'xVisible' }}
-        disabled={!visible}
-        align={align}
-        onAlign={this.onAlign}
-      >
-        <PopupInner
-          hiddenClassName={hiddenClassName}
-          {...popupInnerProps}
-        >
-          {props.children}
-        </PopupInner>
-      </Align>
-    </Animate>);
+            {popupInner}
+          </Align>
+        ) : (
+          popupInner
+        )}
+      </Animate>
+    );
   }
 
   getZIndexStyle() {

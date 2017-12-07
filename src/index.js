@@ -9,8 +9,7 @@ import { getAlignFromPlacement, getPopupClassNameFromAlign } from './utils';
 import getContainerRenderMixin from 'rc-util/lib/getContainerRenderMixin';
 import Portal from 'rc-util/lib/Portal';
 
-function noop() {
-}
+function noop() {}
 
 function returnEmptyString() {
   return '';
@@ -20,8 +19,16 @@ function returnDocument() {
   return window.document;
 }
 
-const ALL_HANDLERS = ['onClick', 'onMouseDown', 'onTouchStart', 'onMouseEnter',
-  'onMouseLeave', 'onFocus', 'onBlur', 'onContextMenu'];
+const ALL_HANDLERS = [
+  'onClick',
+  'onMouseDown',
+  'onTouchStart',
+  'onMouseEnter',
+  'onMouseLeave',
+  'onFocus',
+  'onBlur',
+  'onContextMenu',
+];
 
 const IS_REACT_16 = !!createPortal;
 
@@ -51,19 +58,20 @@ const Trigger = createReactClass({
   displayName: 'Trigger',
   propTypes: {
     children: PropTypes.any,
-    action: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+    action: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+    ]),
     showAction: PropTypes.any,
     hideAction: PropTypes.any,
     getPopupClassNameFromAlign: PropTypes.any,
     onPopupVisibleChange: PropTypes.func,
     afterPopupVisibleChange: PropTypes.func,
-    popup: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.func,
-    ]).isRequired,
+    popup: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     popupStyle: PropTypes.object,
     prefixCls: PropTypes.string,
     popupClassName: PropTypes.string,
+    popupWrapClassName: PropTypes.string,
     popupPlacement: PropTypes.string,
     builtinPlacements: PropTypes.object,
     popupTransitionName: PropTypes.oneOfType([
@@ -103,6 +111,7 @@ const Trigger = createReactClass({
       afterPopupVisibleChange: noop,
       onPopupAlign: noop,
       popupClassName: '',
+      popupWrapClassName: '',
       mouseEnterDelay: 0,
       mouseLeaveDelay: 0.1,
       focusDelay: 0,
@@ -136,17 +145,20 @@ const Trigger = createReactClass({
   },
 
   componentWillMount() {
-    ALL_HANDLERS.forEach((h) => {
-      this[`fire${h}`] = (e) => {
+    ALL_HANDLERS.forEach(h => {
+      this[`fire${h}`] = e => {
         this.fireEvents(h, e);
       };
     });
   },
 
   componentDidMount() {
-    this.componentDidUpdate({}, {
-      popupVisible: this.state.popupVisible,
-    });
+    this.componentDidUpdate(
+      {},
+      {
+        popupVisible: this.state.popupVisible,
+      }
+    );
   },
 
   componentWillReceiveProps({ popupVisible }) {
@@ -177,27 +189,42 @@ const Trigger = createReactClass({
     // https://github.com/react-component/trigger/issues/50
     if (state.popupVisible) {
       let currentDocument;
-      if (!this.clickOutsideHandler && (this.isClickToHide() || this.isContextMenuToShow())) {
+      if (
+        !this.clickOutsideHandler &&
+        (this.isClickToHide() || this.isContextMenuToShow())
+      ) {
         currentDocument = props.getDocument();
-        this.clickOutsideHandler = addEventListener(currentDocument,
-          'mousedown', this.onDocumentClick);
+        this.clickOutsideHandler = addEventListener(
+          currentDocument,
+          'mousedown',
+          this.onDocumentClick
+        );
       }
       // always hide on mobile
       if (!this.touchOutsideHandler) {
         currentDocument = currentDocument || props.getDocument();
-        this.touchOutsideHandler = addEventListener(currentDocument,
-          'touchstart', this.onDocumentClick);
+        this.touchOutsideHandler = addEventListener(
+          currentDocument,
+          'touchstart',
+          this.onDocumentClick
+        );
       }
       // close popup when trigger type contains 'onContextMenu' and document is scrolling.
       if (!this.contextMenuOutsideHandler1 && this.isContextMenuToShow()) {
         currentDocument = currentDocument || props.getDocument();
-        this.contextMenuOutsideHandler1 = addEventListener(currentDocument,
-          'scroll', this.onContextMenuClose);
+        this.contextMenuOutsideHandler1 = addEventListener(
+          currentDocument,
+          'scroll',
+          this.onContextMenuClose
+        );
       }
       // close popup when trigger type contains 'onContextMenu' and window is blur.
       if (!this.contextMenuOutsideHandler2 && this.isContextMenuToShow()) {
-        this.contextMenuOutsideHandler2 = addEventListener(window,
-          'blur', this.onContextMenuClose);
+        this.contextMenuOutsideHandler2 = addEventListener(
+          window,
+          'blur',
+          this.onContextMenuClose
+        );
       }
       return;
     }
@@ -227,10 +254,13 @@ const Trigger = createReactClass({
   onPopupMouseLeave(e) {
     // https://github.com/react-component/trigger/pull/13
     // react bug?
-    if (e.relatedTarget && !e.relatedTarget.setTimeout &&
+    if (
+      e.relatedTarget &&
+      !e.relatedTarget.setTimeout &&
       this._component &&
       this._component.getPopupDomNode &&
-      contains(this._component.getPopupDomNode(), e.relatedTarget)) {
+      contains(this._component.getPopupDomNode(), e.relatedTarget)
+    ) {
       return;
     }
     this.delaySetPopupVisible(false, this.props.mouseLeaveDelay);
@@ -297,7 +327,10 @@ const Trigger = createReactClass({
     this.preTouchTime = 0;
     event.preventDefault();
     const nextVisible = !this.state.popupVisible;
-    if (this.isClickToHide() && !nextVisible || nextVisible && this.isClickToShow()) {
+    if (
+      (this.isClickToHide() && !nextVisible) ||
+      (nextVisible && this.isClickToShow())
+    ) {
       this.setPopupVisible(!this.state.popupVisible);
     }
   },
@@ -337,7 +370,9 @@ const Trigger = createReactClass({
     const props = this.props;
     const { popupPlacement, builtinPlacements, prefixCls } = props;
     if (popupPlacement && builtinPlacements) {
-      className.push(getPopupClassNameFromAlign(builtinPlacements, prefixCls, align));
+      className.push(
+        getPopupClassNameFromAlign(builtinPlacements, prefixCls, align)
+      );
     }
     if (props.getPopupClassNameFromAlign) {
       className.push(props.getPopupClassNameFromAlign(align));
@@ -348,8 +383,16 @@ const Trigger = createReactClass({
   getPopupAlign() {
     const props = this.props;
     const { popupPlacement, popupAlign, builtinPlacements } = props;
+    if (!popupAlign || Object.getOwnPropertyNames(popupAlign).length === 0) {
+      return null;
+    }
+
     if (popupPlacement && builtinPlacements) {
-      return getAlignFromPlacement(builtinPlacements, popupPlacement, popupAlign);
+      return getAlignFromPlacement(
+        builtinPlacements,
+        popupPlacement,
+        popupAlign
+      );
     }
     return popupAlign;
   },
@@ -392,14 +435,17 @@ const Trigger = createReactClass({
   getContainer() {
     const { props } = this;
     const popupContainer = document.createElement('div');
+    popupContainer.className = props.popupWrapClassName;
     // Make sure default popup container will never cause scrollbar appearing
     // https://github.com/react-component/trigger/issues/41
     popupContainer.style.position = 'absolute';
     popupContainer.style.top = '0';
     popupContainer.style.left = '0';
+    popupContainer.style.bottom = '0';
     popupContainer.style.width = '100%';
-    const mountNode = props.getPopupContainer ?
-      props.getPopupContainer(findDOMNode(this)) : props.getDocument().body;
+    const mountNode = props.getPopupContainer
+      ? props.getPopupContainer(findDOMNode(this))
+      : props.getDocument().body;
     mountNode.appendChild(popupContainer);
     return popupContainer;
   },
@@ -474,7 +520,10 @@ const Trigger = createReactClass({
 
   isContextMenuToShow() {
     const { action, showAction } = this.props;
-    return action.indexOf('contextMenu') !== -1 || showAction.indexOf('contextMenu') !== -1;
+    return (
+      action.indexOf('contextMenu') !== -1 ||
+      showAction.indexOf('contextMenu') !== -1
+    );
   },
 
   isClickToHide() {
@@ -484,12 +533,16 @@ const Trigger = createReactClass({
 
   isMouseEnterToShow() {
     const { action, showAction } = this.props;
-    return action.indexOf('hover') !== -1 || showAction.indexOf('mouseEnter') !== -1;
+    return (
+      action.indexOf('hover') !== -1 || showAction.indexOf('mouseEnter') !== -1
+    );
   },
 
   isMouseLeaveToHide() {
     const { action, hideAction } = this.props;
-    return action.indexOf('hover') !== -1 || hideAction.indexOf('mouseLeave') !== -1;
+    return (
+      action.indexOf('hover') !== -1 || hideAction.indexOf('mouseLeave') !== -1
+    );
   },
 
   isFocusToShow() {
@@ -502,7 +555,11 @@ const Trigger = createReactClass({
     return action.indexOf('focus') !== -1 || hideAction.indexOf('blur') !== -1;
   },
   forcePopupAlign() {
-    if (this.state.popupVisible && this._component && this._component.alignInstance) {
+    if (
+      this.state.popupVisible &&
+      this._component &&
+      this._component.alignInstance
+    ) {
       this._component.alignInstance.forceAlign();
     }
   },
@@ -588,10 +645,7 @@ const Trigger = createReactClass({
       );
     }
 
-    return [
-      trigger,
-      portal,
-    ];
+    return [trigger, portal];
   },
 });
 

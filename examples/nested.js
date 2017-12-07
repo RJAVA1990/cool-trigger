@@ -1,31 +1,30 @@
 webpackJsonp([1],{
 
-/***/ 73:
+/***/ 57:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(74);
+module.exports = __webpack_require__(58);
 
 
 /***/ }),
 
-/***/ 74:
+/***/ 58:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rc_trigger__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_trigger_assets_index_less__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_trigger_assets_index_less___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rc_trigger_assets_index_less__);
+throw new Error("Cannot find module \"rc-trigger\"");
+throw new Error("Cannot find module \"rc-trigger/assets/index.less\"");
 
 
 
@@ -92,7 +91,7 @@ var Test = function (_React$Component) {
       { style: popupBorderStyle },
       __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('div', { ref: this.saveContainerRef }),
       __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_5_rc_trigger__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_5_rc_trigger___default.a,
         {
           popupPlacement: 'bottom',
           action: ['click'],
@@ -120,7 +119,7 @@ var Test = function (_React$Component) {
         'div',
         null,
         __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_5_rc_trigger__["a" /* default */],
+          __WEBPACK_IMPORTED_MODULE_5_rc_trigger___default.a,
           {
             popupPlacement: 'left',
             action: ['click'],
@@ -135,7 +134,7 @@ var Test = function (_React$Component) {
             'span',
             null,
             __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_5_rc_trigger__["a" /* default */],
+              __WEBPACK_IMPORTED_MODULE_5_rc_trigger___default.a,
               {
                 popupPlacement: 'bottom',
                 action: ['hover'],
@@ -159,7 +158,7 @@ var Test = function (_React$Component) {
         'div',
         { style: { margin: 50 } },
         __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_5_rc_trigger__["a" /* default */],
+          __WEBPACK_IMPORTED_MODULE_5_rc_trigger___default.a,
           {
             popupPlacement: 'right',
             action: ['hover'],
@@ -187,5 +186,5 @@ __WEBPACK_IMPORTED_MODULE_4_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 
 /***/ })
 
-},[73]);
+},[57]);
 //# sourceMappingURL=nested.js.map
